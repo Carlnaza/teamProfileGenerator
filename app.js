@@ -3,6 +3,7 @@ const Manager = require('./employees/Manager.js')
 const Engineer = require('./employees/Engineer.js')
 const Employee = require('./employees/Employee.js')
 const Intern = require('./employees/Intern.js')
+const handlebars = require('handlebars')
 const fs = require('fs')
 
 const employees = []
@@ -134,5 +135,7 @@ async function getInt(intVal) {
     }
     console.log(employees)
 }
+
+
 
 getManager()
