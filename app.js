@@ -3,6 +3,7 @@ const Manager = require('./employees/Manager.js')
 const Engineer = require('./employees/Engineer.js')
 const Employee = require('./employees/Employee.js')
 const Intern = require('./employees/Intern.js')
+const fs = require('fs')
 
 const employees = []
 
@@ -57,6 +58,8 @@ async function getManager() {
         }
     ])
     .then(response => {
+        employees.push(new Manager(response.manName, response.manId, response.manEmail, response.manOffice))
+        console.log(employees)
         getEmp(response.manEmpNum, response.manIntNum)
     })
     .catch(e => console.error(e))
@@ -87,8 +90,7 @@ async function getEmp(empNum, intNum) {
          },
     ])
     .then(response => {
-        console.log(response)
-        employees.push(response)
+        employees.push(new Engineer(response.empName, response.empId, response.empEmail, response.gitHubName))
     })
     .catch(e => console.error(e))
     }
@@ -126,8 +128,7 @@ async function getInt(intVal) {
             },
         ])
         .then(response => {
-            console.log(response)
-            employees.push(response)
+            employees.push(new Intern(response.intName, response.intId, response.intEmail, response.schoolName))
         })
         .catch(e => console.error(e))
     }
