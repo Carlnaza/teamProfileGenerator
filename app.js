@@ -134,8 +134,40 @@ async function getInt(intVal) {
         .catch(e => console.error(e))
     }
     console.log(employees)
+    appendCard(employees)
 }
 
+async function appendCard(arr) {
+    let cards = ''
+    
 
+    await arr.forEach((elem) => {
+      if (elem instanceof Manager) {
+        let text = fs.readFileSync("./html/manager.html", 'utf8')
+        let template = handlebars.compile(text)
+        let result = template(elem)
+        cards += result
+      }
+      if (elem instanceof Engineer) {
+        let text = fs.readFileSync("./html/engineer.html", 'utf8')
+        let template = handlebars.compile(text)
+        let result = template(elem)
+        cards += result
+      }
+      if (elem instanceof Intern) {
+        let text = fs.readFileSync("./html/intern.html", 'utf8')
+        let template = handlebars.compile(text)
+        let result = template(elem)
+        cards += result
+      }
+    })
 
+    let cardObject = {cards}
+
+    let text = fs.readFileSync("./html/index.html", 'utf8')
+    let template = handlebars.compile(text)
+    let result = template(cardObject)
+  
+    fs.writeFile('./employees.html', result, e => e ? console.log(e) : console.log('File successfully created!'))
+  }
 getManager()
