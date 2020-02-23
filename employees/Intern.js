@@ -3,11 +3,11 @@ const Employee = require('./Employee.js')
 class Intern extends Employee {
     constructor(name, id, email, school) {
         super(name, id, email)
-        this.github = school
+        this.school = school
         this.title = 'Intern'
     }
 
-    getGithub() {
+    getSchool() {
         return this.school
     }
 
